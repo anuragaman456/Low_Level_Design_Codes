@@ -1,39 +1,21 @@
 #include<iostream>
-#include<thread>
+#include<thread> //importing thread 
 #include<vector>
 using namespace std;
 
 int shared_value=0;
 
-// so if lock will not present then we can't able determine the shared value result 
 void counter(){
-    int temp=shared_value; // read happen
-    for(int i=0;i<1000;i++){
-        int k=i+k;           //some wait 
-    }
-    shared_value=temp+1;   // then write 
+    int temp=shared_value; 
 }
 
 int main(){
     vector<thread> th;
-    thread t1(counter);
+    thread t1(counter); // it will create a seperate thread which call counter function
     thread t2(counter);
 
-    for(int i=0;i<40000;i++){
-        th.push_back(thread(counter));
-    }
-
-    t1.join();
-    t2.join();
-
-    for (auto& it : th){
-        it.join();
-    }
-
-    // now creating race condition
-
-
-     
+    t1.join();  //it will wait t1 thread will finish its task
+    t2.join();     
     cout<<"current counter value:"<<shared_value<<endl;
     return 0;
 }
